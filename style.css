@@ -8,7 +8,7 @@ h2::after{content:'';z-index:1;bottom:50%;margin-bottom:-2px;height:2px;left:0;r
 .cards .card figcaption,.cards .card::after,h2::after{position:absolute}
 .cards .card,h2,h2 strong{position:relative}
 .wrapper{padding:15px}
-.cards{display:flex;flex-flow:row wrap;}
+.cards{display:flex;flex-flow:row wrap;align-items:center;justify-content:center}
 .cards .card{margin:20px;width:270px;height:405px;overflow:hidden;box-shadow:0 5px 10px rgba(0,0,0,.8);transform-origin:center top;transform-style:preserve-3d;transform:translateZ(0);transition:.3s;}
 .cards .card img{width:100%;vertical-align:middle}
 .cards .card figcaption{bottom:0;left:0;right:0;padding:20px;padding-bottom:10px;font-size:3.5em;background:0 0;color:#fff;transform:translateY(100%);transition:.3s;-webkit-animation:lights 5s 750ms linear infinite;animation:lights 5s 750ms linear infinite}
