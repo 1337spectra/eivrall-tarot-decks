@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Eivrall 3-Card Tarot Spread Reading #1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <style>
+    html{font-size:100%}
+    body{background:#000;color:#fff;}
+    a{color:pink}
+    a:visited{color:#e6e6fa}
+    .limW{display:block;max-width:640px;margin:0 auto}
+    #desc,#intro{font-size:1rem;text-align:left;margin:.25rem auto;padding:.5rem}
+    button,h1,h2,h3,h4{font-weight:700}
+    h1,h2{text-align:center}
+    h1{margin-bottom:0;font-size:2rem}
+    h2{margin-top:.5rem;font-size:1rem}
+    #result{text-align:center}
+    p{text-indent:2em}
+    button{display:block;width:calc(100% - 1.5rem);font-size:1rem;background:inherit;color:inherit;border:none;margin:1rem .5rem 2rem;padding:.25rem;outline:.125rem solid rgba(255,0,192,.8);background:rgba(255,0,192,.2)}
+    button:active{outline:2px solid rgba(255,0,192,1);background:rgba(255,0,192,.4)}
+    label{display:block;text-align:center;width:calc(100% - 1.5rem);font-size:1rem;background:inherit;color:inherit;border:none;margin:2rem .5rem 2rem;padding:.25rem;outline:.125rem solid rgba(0,192,255,.8);background:rgba(0,192,255,.2)}
+    label:active{outline:2px solid rgba(0,192,255,1);background:rgba(0,192,255,.4)}
+    #outcome{display:block;overflow:hidden;height:auto}
+    #cards{display:block;font-size:0;text-align:center;overflow:hidden}
+    .card{font-size:1rem;display:inline-block;width:270px;height:405px;background:#000;border:1px solid rgba(255,255,255,.5);margin:2px;padding-bottom:1.5rem}
+    .limW .card{width:33%;margin:0;border:0;padding-bottom:3rem}
+    .cardWrap{width:100%;padding-bottom:175%;position:relative}
+    .cardImg{position:absolute;top:0;left:0;right:0;bottom:0;background-size:cover;background-color:#708090}
+    .cardImg.reverse{transform:rotate(-180deg)}
+    .cardName{width:100%;height:3rem;font-size:1rem;line-height:1.5rem;position:absolute;bottom:-3rem}
+    #intro{background:rgba(255,255,255,.25)}
+    .invis,input[type=radio],label{display:none}
+    input[type=radio]:not(:checked)+label{display:block}
+    #desc{margin-bottom:3rem}
+    nav{margin:0 auto 27px auto;position:relative;width:590px;height:50px;background-color:#34495e;border-radius:8px;font-size:0}
+    nav a{line-height:50px;height:100%;font-size:15px;display:inline-block;position:relative;z-index:1;text-decoration:none;text-transform:uppercase;text-align:center;color:#fff;cursor:pointer}
+    nav .animation{position:absolute;height:100%;top:0;z-index:0;transition:all .5s ease 0s;border-radius:8px}
+    a:nth-child(1){width:100px}
+    a:nth-child(2){width:110px}
+    a:nth-child(3){width:100px}
+    a:nth-child(4){width:160px}
+    a:nth-child(5){width:120px}
+    a:nth-child(1):hover~.animation,nav .start-home{width:100px;left:0;background-color:#1abc9c}
+    a:nth-child(2):hover~.animation,nav .start-about{width:110px;left:100px;background-color:#e74c3c}
+    a:nth-child(3):hover~.animation,nav .start-blog{width:100px;left:210px;background-color:#3498db}
+    a:nth-child(4):hover~.animation,nav .start-portefolio{width:160px;left:310px;background-color:#9b59b6}
+    a:nth-child(5):hover~.animation,nav .start-contact{width:120px;left:470px;background-color:#e67e22}
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html">Deck</a>
+    <a href="#">Descript.</a>
+    <a href="layout.html">Layout</a>
+    <a href="reading.html">Reading</a>
+    <a href="#">Misc.</a>
+    <div class="animation start-home"></div>
+  </nav>
+  <h1>3-Card Tarot Spread Reading</h1>
+  <div id="intro" class="limW">
+    <h3>How to use this tool</h3>
+    <p>
+      This tool will generate 3 tarot cards. But before you press the button, <i>think about what you want this tool to divine about.</i> It could be love, work, studies, or generally your life, or even just today.
+    </p>
+    <p>
+      To the three cards, you can assign the meanings of “past/present/future”; “what you want/what the other party wants/where you are headed”, “the conscious/the subconcious/the world”, or other groups of three. There aren’t many rules at all in tarot reading; the cards simply serve as inspiration.
+    </p>
+    <h4>Read the above explanation before you start.</h4>
+  </div>
+  <div class="limW">
+    <button type="button" onClick="genCards()">
+      Draw 3 tarot cards
+    </button>
+    <input id="showBig" type="radio" name="big" value="1" onchange="showBig(true)"/><label for="showBig">Show large cards</label>
+    <input id="showSmall" type="radio" name="big" value="0" onchange="showBig(false)" checked/><label for="showSmall">Fit cards in one row</label>
+  </div>
+  <div id="result" class="limW">
+    <h3 id="outcome"></h3>
+    <div id="cards">
+      <div class="card">
+        <div class="cardWrap">
+          <div class="cardImg"></div>
+          <div class="cardName">
+            Not set
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardWrap">
+          <div class="cardImg"></div>
+          <div class="cardName">
+            Not set
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardWrap">
+          <div class="cardImg"></div>
+          <div class="cardName">
+            Not set
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="desc" class="limW">
+    <h3>Technical explanation</h3>
+    <p>
+      Cards are drawn without replacement from the 22 cards of the Major Arcana, which yields 22 &times; 21 &times; 20 = 9240 combinations. Each card can be drawn in 2 orientations, which yields 2&sup3; = 8 combinations. Multiplied together, that yields 73920 combinations.
+    </p>
+    <p>
+      This tool draws a random integer between 0 and 2<span class="invis">^</span><sup>17</sup>, between which Javascript can reliably generate reasonably-uniform pseudorandom integers. If the result is greater than or equal to 73920, the random draw is discarded and the random number is generated again.
+    </p>
+    <p>
+      The first card is determined by dividing the result by 22, then the orientation by dividing the result by 2. The second card uses 21, the number of cards left in the deck by then. The third card uses 20, likewise. So small changes change the first card, and large changes change the last card.
+    </p>
+    <p>
+      However, this method sometimes produces duplicates. To prevent that, any draws that are equal to or larger than a previous draw must be incremented by 1. The calculation of this is slightly abbreviated; if it sees that the second card needs to be incremented, it checks if the last card needs to also be incremented, in which case, it increments the last card by 2.
+    </p>
+  </div>
+  <br />
+  <script>
+    const cardImg = [
+    "https://assets.codepen.io/7598158/TheFool_1.webp",
+    "https://assets.codepen.io/7598158/TheMagician.webp",
+    "https://assets.codepen.io/7598158/TheHighPriestess.webp",
+    "https://assets.codepen.io/7598158/TheEmpress.webp",
+    "https://assets.codepen.io/7598158/TheEmperor.webp",
+    "https://assets.codepen.io/7598158/TheHierophant.webp",
+    "https://assets.codepen.io/7598158/TheLovers_1.webp",
+    "https://assets.codepen.io/7598158/TheChariot.webp",
+    "https://assets.codepen.io/7598158/Strength_1.webp",
+    "https://assets.codepen.io/7598158/TheHermit.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_Wheel_of_Fortune__43f60684-22ea-4575-bd51-566ab160b1c1-2-Enhanced.webp",
+    "https://assets.codepen.io/7598158/Justice_1.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_Hanged_Man_tarot__c9b34c14-d20f-482b-b891-77961c1d1434-2-Enhanced.webp",
+    "https://assets.codepen.io/7598158/Death.webp",
+    "https://assets.codepen.io/7598158/Temperance.webp",
+    "https://assets.codepen.io/7598158/TheDevil.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_Tower_tarot_card__31590316-e8dd-47c3-9240-50c4b467fe58-2-Enhanced.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_Star_tarot_card_i_df1974d1-8869-4031-a9e9-bb5db6574113-2-Enhanced.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_Moon_tarot_card_i_143ccc71-336d-49e5-9372-2d504ebbcbab-2-Enhanced.webp",
+    "https://assets.codepen.io/7598158/TheSun.webp",
+    "https://assets.codepen.io/7598158/Judgement_1.webp",
+    "https://assets.codepen.io/7598158/1337Spectra_a_digital_art_piece_depicting_The_World_tarot_card__9479eca4-b89f-417b-b502-522205f67be2-2-Enhanced.webp",
+    ];
+    const cardStr = [
+        "The Fool",
+        "The Magician",
+        "The High Priestess",
+        "The Empress",
+        "The Emperor",
+        "The Hierophant",
+        "The Lovers",
+        "The Chariot",
+        "Strength",
+        "The Hermit",
+        "Wheel of Fortune",
+        "Justice",
+        "The Hanged Man",
+        "Death",
+        "Temperance",
+        "The Devil",
+        "The Tower",
+        "The Star",
+        "The Moon",
+        "The Sun",
+        "Judgment",
+        "The World",
+    ];
+    const oriStr = [" (Upright)", " (Reverse)"];
+    var genCards = () => {
+        // There are 73920 combinations of 3 of 22*2 (for orientation) tarot cards
+        // The smallest power of 2 larger than that is 131,072 or Math.pow(2,17). JS can do ints up to Math.pow(2,53), so we're safe.
+        document.getElementById("result").classList.remove("hidden");
+        var outcome = 0;
+        while (true) {
+            outcome = Math.floor(Math.pow(2, 17) * Math.random());
+            console.log(outcome);
+            if (outcome < 73920) {
+                break;
+            }
+        }
+        document.getElementById("outcome").innerText = "Result #" + outcome;
+        var cards = [0, 0, 0, 0, 0, 0];
+        for (var i = 0; i < 3; i++) {
+            cards[i] = outcome % (22 - i);
+            outcome = Math.floor(outcome / (22 - i));
+            cards[i + 3] = outcome % 2;
+            outcome = Math.floor(outcome / 2);
+        }
+        console.log("Preliminary results:", cards);
+        // Adjust the results to simulate drawing with replacement.
+        // The last two cards must be adjusted according to the other previous draws.
+        if (cards[1] >= cards[0]) {
+            // The 2nd card should be incremented. Check if the 3rd one needs to be incremented too.
+            if (cards[2] >= cards[1]) {
+                cards[2] += 2;
+            }
+            cards[1]++;
+        } else if (cards[2] >= cards[0]) {
+            cards[2]++;
+        }
+        console.log("Results:", cards);
+        updateCardDetails(cards);
+    };
+    var updateCardDetails = (cardData) => {
+        var divs = document.querySelectorAll(".card");
+        for (var i = 0; i < 3; i++) {
+            var img = divs[i].querySelector(".cardImg");
+            img.style.backgroundImage = "url(" + cardImg[cardData[i]] + ")";
+            if (cardData[i + 3]) {
+                img.classList.add("reverse");
+            } else {
+                img.classList.remove("reverse");
+            }
+            divs[i].querySelector(".cardName").innerText = cardStr[cardData[i]] + oriStr[cardData[i + 3]];
+        }
+    };
+    var showBig = (big) => {
+        if (big) {
+            document.getElementById("result").classList.remove("limW");
+        } else {
+            document.getElementById("result").classList.add("limW");
+        }
+    };
+  </script>
+</body>
+
+</html>
